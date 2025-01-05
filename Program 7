@@ -1,0 +1,31 @@
+# Load necessary libraries
+library(dplyr)
+library(ggplot2)
+
+# Create the data frame purchase_data
+purchase_data <- data.frame(
+  CustomerID = c(101, 102, 103, 104, 105),
+  PurchaseAmount = c(150, 200, 120, 300, 80)
+)
+
+# Calculate statistical measures
+mean_purchase <- mean(purchase_data$PurchaseAmount)
+median_purchase <- median(purchase_data$PurchaseAmount)
+std_dev_purchase <- sd(purchase_data$PurchaseAmount)
+first_quartile <- quantile(purchase_data$PurchaseAmount, 0.25)
+third_quartile <- quantile(purchase_data$PurchaseAmount, 0.75)
+
+# Display the statistical measures
+cat("Mean Purchase Amount:", mean_purchase, "\n")
+cat("Median Purchase Amount:", median_purchase, "\n")
+cat("Standard Deviation:", std_dev_purchase, "\n")
+cat("1st Quartile (25th Percentile):", first_quartile, "\n")
+cat("3rd Quartile (75th Percentile):", third_quartile, "\n")
+
+# Create a histogram using ggplot2
+ggplot(purchase_data, aes(x = PurchaseAmount)) +
+  geom_histogram(binwidth = 50, fill = "blue", color = "black") +
+  labs(title = "Histogram of Purchase Amounts",
+       x = "Purchase Amount",
+       y = "Frequency") +
+theme_minimal()
