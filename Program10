@@ -1,0 +1,59 @@
+library(dplyr)
+
+# Sample data frame
+df <- data.frame(
+  ID = 1:10,
+  Name = c("John", "Jane", "Sam", "Lucy", "Paul", "Anna", "Steve", "Kate", "Tom", "Emma"),
+  Age = c(28, 34, 45, 23, 36, 29, 41, 38, 30, 24),
+  Salary = c(50000, 60000, 55000, 40000, 65000, 48000, 70000, 72000, 43000, 51000),
+  Department = c("HR", "IT", "Finance", "HR", "IT", "Finance", "IT", "HR", "Finance", "IT")
+)
+
+# 1. Select specific columns
+df_selected <- df %>%
+  select(Name, Age, Salary)
+
+# 2. Filter rows based on a condition (Age > 30)
+df_filtered <- df %>%filter(Age > 30)
+
+# 3. Create new variables with mutate (e.g., calculate salary increase)
+df_mutated <- df %>%
+  mutate(Salary_Increment = Salary * 0.1)
+
+# 4. Group the data by Department and summarize (e.g., average salary)
+df_grouped <- df %>%
+  group_by(Department) %>%
+  summarize(Average_Salary = mean(Salary), Count = n())
+
+# 5. Arrange the data by Salary in descending order
+df_arranged <- df %>%
+  arrange(desc(Salary))
+
+# 6. Join two data frames (creating a second data frame for the example)
+df2 <- data.frame(
+  ID = 1:5,
+  Bonus = c(2000, 3000, 2500, 1800, 2200)
+)
+
+# Perform a left join with df2 to add bonus information to df
+df_joined <- df %>%
+  left_join(df2, by = "ID")
+
+# Display the results of each step
+print("Selected Columns:")
+print(df_selected)
+
+print("Filtered Data (Age > 30):")
+print(df_filtered)
+
+print("Mutated Data (Salary Increment):")
+print(df_mutated)
+
+print("Grouped by Department (Average Salary):")
+print(df_grouped)
+
+print("Arranged by Salary (Descending):")
+print(df_arranged)
+
+print("Joined Data with Bonus:")
+print(df_joined)
